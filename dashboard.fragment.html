@@ -19,20 +19,35 @@
         </div>
     </div>
     <div class="stats-grid dashboard-stats">
-        <div class="stat-card">
-            <div class="stat-title">Total Bruto</div>
-            <div class="stat-value" id="totalBruto">R$ 0,00</div>
-            <div class="stat-meta" id="totalBrutoMeta">Empresas liberadas</div>
+        <div class="stat-card stat-card--primary">
+            <span class="stat-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"/><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"/><path d="M18 12a2 2 0 0 0 0 4h4v-4Z"/></svg>
+            </span>
+            <div class="stat-body">
+                <div class="stat-title">Total Bruto</div>
+                <div class="stat-value" id="totalBruto">R$ 0,00</div>
+                <div class="stat-meta" id="totalBrutoMeta">Empresas liberadas</div>
+            </div>
         </div>
-        <div class="stat-card">
-            <div class="stat-title">Assinados</div>
-            <div class="stat-value" id="totalAssinados">0</div>
-            <div class="stat-meta">Pagamentos validados</div>
+        <div class="stat-card stat-card--success">
+            <span class="stat-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9c1.7 0 3.29.47 4.65 1.29"/></svg>
+            </span>
+            <div class="stat-body">
+                <div class="stat-title">Assinados</div>
+                <div class="stat-value" id="totalAssinados">0</div>
+                <div class="stat-meta">Pagamentos validados</div>
+            </div>
         </div>
-        <div class="stat-card">
-            <div class="stat-title">Aguardando</div>
-            <div class="stat-value" id="totalPendentes">0</div>
-            <div class="stat-meta">Pendentes de assinatura</div>
+        <div class="stat-card stat-card--warning">
+            <span class="stat-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+            </span>
+            <div class="stat-body">
+                <div class="stat-title">Aguardando</div>
+                <div class="stat-value" id="totalPendentes">0</div>
+                <div class="stat-meta">Pendentes de assinatura</div>
+            </div>
         </div>
     </div>
     <div id="dashboardCompanyBreakdown" class="company-totals dashboard-company-breakdown">

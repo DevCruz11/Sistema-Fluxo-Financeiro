@@ -2552,4 +2552,86 @@ th {
     }
 }
 
+/* === Dashboard: stat cards com cor semântica e ícone === */
+.dashboard-stats .stat-card {
+    flex-direction: row;
+    align-items: center;
+    gap: 14px;
+    padding: 18px 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.dashboard-stats .stat-card::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: var(--accent, var(--primary));
+}
+
+.dashboard-stats .stat-icon {
+    flex: 0 0 auto;
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent, var(--primary));
+    background: var(--accent-soft, rgba(0, 82, 204, 0.1));
+}
+
+.dashboard-stats .stat-icon svg {
+    width: 24px;
+    height: 24px;
+}
+
+.dashboard-stats .stat-body {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+}
+
+.dashboard-stats .stat-value {
+    font-size: 26px;
+    font-variant-numeric: tabular-nums;
+}
+
+.dashboard-stats .stat-card:hover {
+    border-color: var(--accent, var(--primary));
+}
+
+.stat-card--primary { --accent: #0052cc; --accent-soft: rgba(0, 82, 204, 0.10); }
+.stat-card--success { --accent: #15a34a; --accent-soft: rgba(21, 163, 74, 0.12); }
+.stat-card--warning { --accent: #d97706; --accent-soft: rgba(217, 119, 6, 0.12); }
+
+/* Totais por empresa: números alinhados */
+.company-totals-body {
+    font-variant-numeric: tabular-nums;
+}
+
+/* Saúde do sistema: bolinha de status (não depende só da cor) */
+.ops-item strong {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.ops-item strong::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #94a3b8;
+    flex: 0 0 auto;
+}
+
+.ops-item strong.is-ok::before { background: #16a34a; }
+.ops-item strong.is-warn::before { background: #d97706; }
+.ops-item strong.is-error::before { background: #dc2626; }
+
 
