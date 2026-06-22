@@ -3772,6 +3772,7 @@ class UIManager {
             return;
         }
         container.innerHTML = `
+            <div class="data-table-wrapper data-table-spaced">
             <table>
                 <thead>
                     <tr>
@@ -3805,6 +3806,7 @@ class UIManager {
                     `).join('')}
                 </tbody>
             </table>
+            </div>
         `;
     }
 
@@ -3841,22 +3843,25 @@ class UIManager {
         const body = document.getElementById('rolesGrid');
         if(!body) return;
         body.innerHTML = `
-            <table>
-                <thead>
-                </thead>
-                <tbody>
-                    ${this.core.admin.roles.map(r => `
-                        <tr>
-                            <td>${r.name}</td>
-                            <td>${this.formatPermissionsForDisplay(r.permissions)}</td>
-                            <td>
-                                <button class="btn btn-ghost" data-role-action="edit" data-role-id="${r.id}">Editar</button>
-                                <button class="btn btn-danger" data-role-action="delete" data-role-id="${r.id}">Excluir</button>
-                            </td>
-                        </tr>
-                    `).join('')}
-                </tbody>
-            </table>
+            <div class="data-table-wrapper data-table-spaced">
+                <table>
+                    <thead>
+                        <tr><th>Cargo</th><th>Permissões</th><th>Ações</th></tr>
+                    </thead>
+                    <tbody>
+                        ${this.core.admin.roles.map(r => `
+                            <tr>
+                                <td><strong>${r.name}</strong></td>
+                                <td>${this.formatPermissionsForDisplay(r.permissions)}</td>
+                                <td class="role-row-actions">
+                                    <button class="btn btn-ghost" data-role-action="edit" data-role-id="${r.id}">Editar</button>
+                                    <button class="btn btn-danger" data-role-action="delete" data-role-id="${r.id}">Excluir</button>
+                                </td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            </div>
             <button class="btn btn-primary btn-top-spaced" data-role-action="create">Criar Novo Cargo</button>
         `;
         if (!body.dataset.boundRoles) {
@@ -3880,8 +3885,10 @@ class UIManager {
 
     formatPermissionsForDisplay(permissions) {
         const list = Array.isArray(permissions) ? permissions : [];
-        if (!list.length) return 'Sem permissões';
-        return list.map((permission) => this.formatPermissionLabel(permission)).join(', ');
+        if (!list.length) return '<span class="perm-chip perm-chip--empty">Sem permissões</span>';
+        return `<div class="perm-chips">${list
+            .map((permission) => `<span class="perm-chip">${this.formatPermissionLabel(permission)}</span>`)
+            .join('')}</div>`;
     }
 
     formatPermissionLabel(permission) {
