@@ -4697,7 +4697,9 @@ class UIManager {
             }
             body.innerHTML = items.map(item => {
                 const date = item.created_at ? new Date(item.created_at).toLocaleString('pt-BR') : '-';
-                const status = item.success ? 'Sucesso' : 'Falha';
+                const status = item.success
+                    ? '<span class="audit-status audit-status--ok">Sucesso</span>'
+                    : '<span class="audit-status audit-status--fail">Falha</span>';
                 return `
                     <tr>
                         <td>${date}</td>
