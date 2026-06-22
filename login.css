@@ -11,10 +11,10 @@
     justify-content: center;
     padding: 24px;
     background:
-        radial-gradient(120% 80% at 10% 15%, rgba(76, 154, 255, 0.35) 0%, rgba(76, 154, 255, 0) 60%),
-        radial-gradient(120% 80% at 90% 20%, rgba(0, 82, 204, 0.32) 0%, rgba(0, 82, 204, 0) 60%),
-        radial-gradient(120% 80% at 50% 85%, rgba(0, 212, 170, 0.24) 0%, rgba(0, 212, 170, 0) 60%),
-        linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 50%, var(--primary-dark) 100%);
+        radial-gradient(38% 38% at 28% 30%, rgba(99, 102, 241, 0.45) 0%, rgba(99, 102, 241, 0) 70%),
+        radial-gradient(34% 34% at 76% 74%, rgba(45, 212, 191, 0.32) 0%, rgba(45, 212, 191, 0) 70%),
+        radial-gradient(circle at 50% 38%, #16203f 0%, #0b1020 70%),
+        #0b1020;
     transition: opacity 0.2s ease, visibility 0.2s ease;
 }
 
@@ -93,39 +93,48 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 50%, var(--primary-dark) 100%);
-    background-size: 200% 200%;
+    background:
+        radial-gradient(circle at 50% 38%, #16203f 0%, #0b1020 68%),
+        #0b1020;
     position: relative;
+    overflow: hidden;
     opacity: 0;
-    animation-name: loginScreenFade, loginGradientMove;
-    animation-duration: 0.7s, 12s;
-    animation-timing-function: ease-out, ease-in-out;
-    animation-iteration-count: 1, infinite;
-    animation-fill-mode: forwards, none;
+    animation-name: loginScreenFade;
+    animation-duration: 0.7s;
+    animation-timing-function: ease-out;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
 }
 
+/* Grade neon em movimento */
 .login-screen::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="50" cy="10" r="0.5" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
-    opacity: 0.1;
+    inset: -2px;
+    background-image:
+        linear-gradient(rgba(99, 102, 241, 0.18) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(99, 102, 241, 0.18) 1px, transparent 1px);
+    background-size: 46px 46px;
+    -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 45%, #000 0%, transparent 78%);
+    mask-image: radial-gradient(ellipse 80% 70% at 50% 45%, #000 0%, transparent 78%);
+    animation-name: loginGridMove;
+    animation-duration: 6s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    pointer-events: none;
 }
 
+/* Brilho indigo/teal flutuante */
 .login-screen::after {
     content: '';
     position: absolute;
     inset: 0;
     background:
-        radial-gradient(120% 80% at 10% 15%, rgba(76, 154, 255, 0.35) 0%, rgba(76, 154, 255, 0) 60%),
-        radial-gradient(120% 80% at 90% 20%, rgba(0, 82, 204, 0.32) 0%, rgba(0, 82, 204, 0) 60%),
-        radial-gradient(120% 80% at 50% 85%, rgba(0, 212, 170, 0.25) 0%, rgba(0, 212, 170, 0) 60%);
-    opacity: 0.9;
-    animation-name: loginWavesMove;
-    animation-duration: 10s;
+        radial-gradient(38% 38% at 28% 32%, rgba(99, 102, 241, 0.55) 0%, rgba(99, 102, 241, 0) 70%),
+        radial-gradient(34% 34% at 76% 72%, rgba(45, 212, 191, 0.40) 0%, rgba(45, 212, 191, 0) 70%);
+    filter: blur(8px);
+    animation-name: loginGlowDrift;
+    animation-duration: 14s;
     animation-timing-function: ease-in-out;
     animation-iteration-count: infinite;
     pointer-events: none;
@@ -369,25 +378,16 @@
     to { opacity: 1; }
 }
 
-@keyframes loginGradientMove {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+@keyframes loginGridMove {
+    0% { background-position: 0 0, 0 0; }
+    100% { background-position: 46px 46px, 46px 46px; }
 }
 
-@keyframes loginWavesMove {
-    0% {
-        background-position: 0% 0%, 100% 0%, 50% 100%;
-        transform: translateY(0);
-    }
-    50% {
-        background-position: 20% 10%, 80% 15%, 50% 90%;
-        transform: translateY(-8px);
-    }
-    100% {
-        background-position: 0% 0%, 100% 0%, 50% 100%;
-        transform: translateY(0);
-    }
+@keyframes loginGlowDrift {
+    0% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(6%, 4%) scale(1.12); }
+    66% { transform: translate(-5%, 3%) scale(0.94); }
+    100% { transform: translate(0, 0) scale(1); }
 }
 
 @keyframes loginPanelUp {
@@ -408,6 +408,7 @@
 /* Acessibilidade: respeita usuários que pedem menos movimento */
 @media (prefers-reduced-motion: reduce) {
     .login-screen,
+    .login-screen::before,
     .login-screen::after,
     .login-box,
     .login-box h2,
