@@ -7535,7 +7535,18 @@ function registrarEvento(tipo, usuario, detalhes, entidade = null, recordId = nu
 }
 
 function setupLoginVisualEffects() {
-    return;
+    const toggle = document.getElementById('togglePass');
+    const pass = document.getElementById('loginPass');
+    if (!toggle || !pass || toggle.dataset.bound === '1') return;
+    toggle.dataset.bound = '1';
+    toggle.addEventListener('click', function () {
+        const willShow = pass.type === 'password';
+        pass.type = willShow ? 'text' : 'password';
+        toggle.classList.toggle('is-visible', willShow);
+        toggle.setAttribute('aria-pressed', willShow ? 'true' : 'false');
+        toggle.setAttribute('aria-label', willShow ? 'Ocultar senha' : 'Mostrar senha');
+        pass.focus();
+    });
 }
 
 function teardownLoginVisualEffects() {

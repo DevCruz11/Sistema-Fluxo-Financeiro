@@ -2,7 +2,7 @@
    Must be external JS because CSP in production blocks inline scripts. */
 (async function loadAppWithFragments() {
     try {
-        const ASSET_VERSION = '20260227-f10';
+        const ASSET_VERSION = '20260227-f11';
         const sections = document.querySelectorAll('[data-fragment]');
 
         for (const section of sections) {
@@ -34,11 +34,20 @@
         if (login && !login.innerHTML.trim()) {
             login.innerHTML = `
                 <div class="login-box">
+                    <div class="login-brand">
+                        <img src="/assets/logo-dmf.png" alt="DMF Empreendimentos" class="login-logo">
+                    </div>
                     <h2 class="login-title">DMF Empreendimentos</h2>
                     <p class="login-subtitle">Acesso seguro ao sistema financeiro empresarial.</p>
                     <div class="form-group">
-                        <input type="text" id="loginInput" placeholder="Usuario ou Email" class="styled-input" autocomplete="username">
-                        <input type="password" id="loginPass" placeholder="Senha" class="styled-input" autocomplete="current-password">
+                        <div class="login-field">
+                            <label for="loginInput" class="sr-only">Usuario ou Email</label>
+                            <input type="text" id="loginInput" placeholder="Usuario ou Email" class="styled-input" autocomplete="username">
+                        </div>
+                        <div class="login-field">
+                            <label for="loginPass" class="sr-only">Senha</label>
+                            <input type="password" id="loginPass" placeholder="Senha" class="styled-input" autocomplete="current-password">
+                        </div>
                     </div>
                     <button id="btnLogin" class="btn btn-primary btn-full">Acessar Sistema</button>
                     <p id="loginStatus" class="login-helper">Falha ao carregar a interface completa. Tente recarregar.</p>
