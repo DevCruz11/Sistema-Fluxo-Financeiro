@@ -2636,24 +2636,34 @@ th {
 
 /* === Abas segmentadas (admin + auditoria; exclui pagamentos) === */
 .admin-tabs:not(.payments-tabs) {
-    display: inline-flex;
-    flex-wrap: wrap;
+    display: flex;
+    flex-wrap: nowrap;
+    width: fit-content;
+    max-width: 100%;
+    overflow-x: auto;
     gap: 4px;
     padding: 4px;
     background: #eef2f8;
     border: 1px solid #e3ebf6;
     border-radius: 12px;
     margin-bottom: 18px;
+    scrollbar-width: none;
+}
+
+.admin-tabs:not(.payments-tabs)::-webkit-scrollbar {
+    display: none;
 }
 
 .admin-tabs:not(.payments-tabs) .tab-btn {
     margin: 0;
+    flex: 0 0 auto;
     padding: 9px 18px;
     border-radius: 8px;
     background: transparent;
     color: #5b6f89;
     font-size: 14px;
     font-weight: 600;
+    white-space: nowrap;
     box-shadow: none;
     transition: background 0.18s ease, color 0.18s ease, box-shadow 0.18s ease;
 }
