@@ -1066,22 +1066,65 @@ tr:hover { background: #f8fbff; }
 }
 
 .archive-summary-card {
-    background: #f7f9fc;
-    border: 1px solid rgba(0, 51, 102, 0.08);
-    border-radius: 12px;
-    padding: 12px 14px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: #ffffff;
+    border: 1px solid rgba(0, 51, 102, 0.1);
+    border-radius: 14px;
+    padding: 16px 18px;
+    box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
 }
+
+.archive-summary-card::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: var(--accent, var(--primary));
+}
+
+.archive-card-icon {
+    flex: 0 0 auto;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent, var(--primary));
+    background: var(--accent-soft, rgba(0, 82, 204, 0.1));
+}
+
+.archive-card-icon svg {
+    width: 22px;
+    height: 22px;
+}
+
+.archive-card-body {
+    min-width: 0;
+}
+
+.archive-summary-card--primary { --accent: #0052cc; --accent-soft: rgba(0, 82, 204, 0.10); }
+.archive-summary-card--info { --accent: #0e7490; --accent-soft: rgba(14, 116, 144, 0.12); }
+.archive-summary-card--success { --accent: #15a34a; --accent-soft: rgba(21, 163, 74, 0.12); }
 
 .archive-summary-card .summary-label {
     color: #4a5568;
-    font-size: 0.85rem;
-    margin-bottom: 4px;
+    font-size: 0.82rem;
+    margin-bottom: 2px;
 }
 
 .archive-summary-card .summary-value {
-    font-size: 1.35rem;
+    font-size: 1.5rem;
     font-weight: 700;
     color: #1f2a44;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.01em;
 }
 
 .archive-summary-card .summary-meta {
@@ -2634,8 +2677,8 @@ th {
 .ops-item strong.is-warn::before { background: #d97706; }
 .ops-item strong.is-error::before { background: #dc2626; }
 
-/* === Abas segmentadas (admin + auditoria; exclui pagamentos) === */
-.admin-tabs:not(.payments-tabs) {
+/* === Abas segmentadas (admin, auditoria e pagamentos) === */
+.admin-tabs {
     display: flex;
     flex-wrap: nowrap;
     width: fit-content;
@@ -2650,11 +2693,11 @@ th {
     scrollbar-width: none;
 }
 
-.admin-tabs:not(.payments-tabs)::-webkit-scrollbar {
+.admin-tabs::-webkit-scrollbar {
     display: none;
 }
 
-.admin-tabs:not(.payments-tabs) .tab-btn {
+.admin-tabs .tab-btn {
     margin: 0;
     flex: 0 0 auto;
     padding: 9px 18px;
@@ -2668,12 +2711,12 @@ th {
     transition: background 0.18s ease, color 0.18s ease, box-shadow 0.18s ease;
 }
 
-.admin-tabs:not(.payments-tabs) .tab-btn:hover {
+.admin-tabs .tab-btn:hover {
     background: rgba(255, 255, 255, 0.65);
     color: #1f2a44;
 }
 
-.admin-tabs:not(.payments-tabs) .tab-btn.active {
+.admin-tabs .tab-btn.active {
     background: #ffffff;
     color: var(--primary);
     box-shadow: 0 2px 6px rgba(13, 82, 196, 0.16);
@@ -2758,6 +2801,28 @@ th {
     border-color: #dde6f3;
     cursor: default;
 }
+
+/* === Pagamentos: tabela e badges de status === */
+#paymentsTable {
+    font-variant-numeric: tabular-nums;
+}
+
+#paymentsTable .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+#paymentsTable .badge::before {
+    content: '';
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    flex: 0 0 auto;
+}
+
+#paymentsTable .badge-signed::before { background: #10b981; }
+#paymentsTable .badge-pending::before { background: #d97706; }
 
 .role-row-actions {
     display: flex;
