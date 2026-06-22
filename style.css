@@ -2716,4 +2716,44 @@ th {
 .audit-status--fail { background: #fef2f2; color: #991b1b; }
 .audit-status--fail::before { background: #ef4444; }
 
+/* === Administração: cargos (chips) e tabelas === */
+.perm-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.perm-chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 9px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #1f3a66;
+    background: rgba(0, 82, 204, 0.08);
+    border: 1px solid rgba(0, 82, 204, 0.14);
+    white-space: nowrap;
+}
+
+.perm-chip--empty {
+    color: #94a3b8;
+    background: #f1f5f9;
+    border-color: #e2e8f0;
+}
+
+.role-row-actions {
+    display: flex;
+    gap: 8px;
+    white-space: nowrap;
+}
+
+.admin-tab-content .data-table-wrapper table {
+    font-variant-numeric: tabular-nums;
+}
+
+.admin-tab-content .data-table-wrapper tbody tr:nth-child(even) {
+    background: #fbfcfe;
+}
+
 
