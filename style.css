@@ -2752,6 +2752,13 @@ th {
     border-color: #e2e8f0;
 }
 
+.perm-chip--more {
+    color: #5b6f89;
+    background: #eef2f8;
+    border-color: #dde6f3;
+    cursor: default;
+}
+
 .role-row-actions {
     display: flex;
     gap: 8px;

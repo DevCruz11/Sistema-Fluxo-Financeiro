@@ -3473,29 +3473,29 @@ class UIManager {
             sessionsTabButton.classList.toggle('hidden', !canManageActiveSessions);
             sessionsTabButton.disabled = !canManageActiveSessions;
         }
-        if (sessionsTab) {
-            sessionsTab.classList.toggle('hidden', !canManageActiveSessions);
+        if (sessionsTab && !canManageActiveSessions) {
+            sessionsTab.classList.add('hidden');
         }
         if (usersTabButton) {
             usersTabButton.classList.toggle('hidden', !canManageUsers);
             usersTabButton.disabled = !canManageUsers;
         }
-        if (usersTab) {
-            usersTab.classList.toggle('hidden', !canManageUsers);
+        if (usersTab && !canManageUsers) {
+            usersTab.classList.add('hidden');
         }
         if (centersTabButton) {
             centersTabButton.classList.toggle('hidden', !canManageUsers);
             centersTabButton.disabled = !canManageUsers;
         }
-        if (centersTab) {
-            centersTab.classList.toggle('hidden', !canManageUsers);
+        if (centersTab && !canManageUsers) {
+            centersTab.classList.add('hidden');
         }
         if (rolesTabButton) {
             rolesTabButton.classList.toggle('hidden', !canManageRoles);
             rolesTabButton.disabled = !canManageRoles;
         }
-        if (rolesTab) {
-            rolesTab.classList.toggle('hidden', !canManageRoles);
+        if (rolesTab && !canManageRoles) {
+            rolesTab.classList.add('hidden');
         }
         if (!canManageActiveSessions || !canManageUsers || !canManageRoles) {
             const currentActiveAdminTab = document.querySelector('.admin-tabs .tab-btn.active');
@@ -3862,7 +3862,6 @@ class UIManager {
                     </tbody>
                 </table>
             </div>
-            <button class="btn btn-primary btn-top-spaced" data-role-action="create">Criar Novo Cargo</button>
         `;
         if (!body.dataset.boundRoles) {
             body.addEventListener('click', async (event) => {
@@ -3886,9 +3885,13 @@ class UIManager {
     formatPermissionsForDisplay(permissions) {
         const list = Array.isArray(permissions) ? permissions : [];
         if (!list.length) return '<span class="perm-chip perm-chip--empty">Sem permissões</span>';
-        return `<div class="perm-chips">${list
-            .map((permission) => `<span class="perm-chip">${this.formatPermissionLabel(permission)}</span>`)
-            .join('')}</div>`;
+        const max = 6;
+        const chips = list.slice(0, max)
+            .map((permission) => `<span class="perm-chip">${this.formatPermissionLabel(permission)}</span>`);
+        if (list.length > max) {
+            chips.push(`<span class="perm-chip perm-chip--more" title="Veja todas em Editar">+${list.length - max}</span>`);
+        }
+        return `<div class="perm-chips">${chips.join('')}</div>`;
     }
 
     formatPermissionLabel(permission) {
