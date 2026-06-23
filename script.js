@@ -5181,6 +5181,16 @@ class UIManager {
         if (this.financeChart) {
             this.financeChart.destroy();
         }
+        const brl = (v) => 'R$ ' + Number(v || 0).toLocaleString('pt-BR');
+        const areaGradient = (context) => {
+            const { ctx: c, chartArea } = context.chart;
+            if (!chartArea) return 'rgba(0, 82, 204, 0.12)';
+            const g = c.createLinearGradient(0, chartArea.top, 0, chartArea.bottom);
+            g.addColorStop(0, 'rgba(0, 82, 204, 0.28)');
+            g.addColorStop(1, 'rgba(0, 82, 204, 0.02)');
+            return g;
+        };
+
         this.financeChart = new Chart(ctx, {
             type: 'line',
             data: {
@@ -5188,13 +5198,57 @@ class UIManager {
                 datasets: [{
                     label: 'Volume de Pagamentos (Simulado)',
                     data: [12000, 19000, 3000, 5000, 20000],
-                    borderColor: '#0a66c2',
+                    borderColor: '#0052cc',
+                    borderWidth: 3,
                     tension: 0.4,
                     fill: true,
-                    backgroundColor: 'rgba(10, 102, 194, 0.1)'
+                    backgroundColor: areaGradient,
+                    pointBackgroundColor: '#ffffff',
+                    pointBorderColor: '#0052cc',
+                    pointBorderWidth: 2,
+                    pointRadius: 0,
+                    pointHoverRadius: 6,
+                    pointHoverBorderWidth: 3,
+                    pointHitRadius: 16
                 }]
             },
-            options: { responsive: true, plugins: { legend: { display: false } } }
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: { mode: 'index', intersect: false },
+                layout: { padding: { top: 8, right: 10, bottom: 2, left: 2 } },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        backgroundColor: '#0f172a',
+                        padding: 12,
+                        cornerRadius: 10,
+                        displayColors: false,
+                        titleColor: '#cbd5e1',
+                        titleFont: { size: 12, weight: '600' },
+                        bodyColor: '#ffffff',
+                        bodyFont: { size: 14, weight: '700' },
+                        callbacks: { label: (c) => brl(c.parsed.y) }
+                    }
+                },
+                scales: {
+                    x: {
+                        grid: { display: false },
+                        border: { display: false },
+                        ticks: { color: '#64748b', font: { size: 12, family: 'Inter, sans-serif' } }
+                    },
+                    y: {
+                        grid: { color: 'rgba(148, 163, 184, 0.18)' },
+                        border: { display: false },
+                        ticks: {
+                            color: '#94a3b8',
+                            padding: 8,
+                            font: { size: 11, family: 'Inter, sans-serif' },
+                            callback: (v) => brl(v)
+                        }
+                    }
+                }
+            }
         });
     }
 }
