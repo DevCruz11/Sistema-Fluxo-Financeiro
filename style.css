@@ -2974,4 +2974,34 @@ th {
     opacity: 1;
 }
 
+/* === Ajustes mobile finais === */
+@media (max-width: 900px) {
+    /* Tabelas largas rolam na horizontal em vez de espremer as colunas */
+    .data-table-wrapper {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .data-table-wrapper table {
+        min-width: 620px;
+    }
+
+    #paymentsTable {
+        min-width: 860px;
+    }
+
+    /* Cards de métrica empilham confortavelmente */
+    .dashboard-stats,
+    .reports-summary-grid,
+    .cobli-stats {
+        grid-template-columns: 1fr;
+    }
+
+    /* Logo da sidebar um pouco menor no drawer */
+    .sidebar-logo {
+        width: 48px;
+        height: 48px;
+    }
+}
+
 
