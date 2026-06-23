@@ -2918,4 +2918,60 @@ th {
     background: #fbfcfe;
 }
 
+/* === Sidebar / moldura do app === */
+.sidebar-logo {
+    display: block;
+    width: 56px;
+    height: 56px;
+    object-fit: contain;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.96);
+    padding: 6px;
+    margin: 0 auto 14px;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
+}
+
+.nav-icon {
+    flex: 0 0 auto;
+    width: 20px;
+    height: 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.9;
+}
+
+.nav-icon svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.nav-side-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+}
+
+.sidebar-nav .btn-side.active {
+    background: rgba(255, 255, 255, 0.18);
+    position: relative;
+}
+
+.sidebar-nav .btn-side.active::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 8px;
+    bottom: 8px;
+    width: 3px;
+    border-radius: 0 3px 3px 0;
+    background: #ffffff;
+}
+
+.sidebar-nav .btn-side.active .nav-icon {
+    opacity: 1;
+}
+
 
