@@ -594,6 +594,19 @@ tr:hover { background: #f8fbff; }
     border: 1px solid rgba(0, 82, 204, 0.12);
     border-radius: 12px;
     box-shadow: 0 6px 14px rgba(0, 30, 84, 0.08);
+    height: 360px;
+}
+
+.chart-panel canvas {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+@media (max-width: 900px) {
+    .chart-panel {
+        height: 280px;
+        padding: 12px;
+    }
 }
 
 .flow-status-row {
