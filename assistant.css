@@ -44,8 +44,10 @@
     flex-direction: column;
     height: 500px;
     border: 1px solid var(--border);
-    border-radius: var(--border-radius);
+    border-radius: var(--border-radius-large);
     background: var(--bg-card);
+    box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
+    overflow: hidden;
 }
 
 .chat-messages {
@@ -86,6 +88,7 @@
 .chat-message.assistant .chat-bubble {
     background: #f1f5f9;
     color: var(--text-primary);
+    border: 1px solid #e7edf5;
     border-bottom-left-radius: 4px;
 }
 

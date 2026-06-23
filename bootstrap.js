@@ -2,7 +2,7 @@
    Must be external JS because CSP in production blocks inline scripts. */
 (async function loadAppWithFragments() {
     try {
-        const ASSET_VERSION = '20260227-f19';
+        const ASSET_VERSION = '20260227-f20';
         const sections = document.querySelectorAll('[data-fragment]');
 
         for (const section of sections) {
