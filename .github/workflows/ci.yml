@@ -10,6 +10,12 @@ jobs:
   validate:
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    # O contexto `secrets` não pode ser usado em `if:` de step; expomos aqui
+    # para que os checks opcionais de produção possam testar `env.*`.
+    env:
+      HAS_BASE_URL: ${{ secrets.BASE_URL != '' }}
+      HAS_ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN != '' }}
+      HAS_TEST_LOGIN: ${{ secrets.TEST_USERNAME != '' && secrets.TEST_PASSWORD != '' }}
 
     steps:
       - name: Checkout
@@ -42,13 +48,13 @@ jobs:
         run: npm run smoke:multiuser
 
       - name: Optional production audit fallback check
-        if: ${{ secrets.BASE_URL != '' }}
+        if: ${{ env.HAS_BASE_URL == 'true' }}
         env:
           BASE_URL: ${{ secrets.BASE_URL }}
         run: npm run check:audit-fallback:prod
 
       - name: Optional production session hardening check
-        if: ${{ secrets.BASE_URL != '' }}
+        if: ${{ env.HAS_BASE_URL == 'true' }}
         env:
           BASE_URL: ${{ secrets.BASE_URL }}
           TEST_USERNAME: ${{ secrets.TEST_USERNAME }}
@@ -56,7 +62,7 @@ jobs:
         run: npm run check:session:prod
 
       - name: Optional production tenant/RBAC check
-        if: ${{ secrets.BASE_URL != '' && (secrets.ACCESS_TOKEN != '' || (secrets.TEST_USERNAME != '' && secrets.TEST_PASSWORD != '')) }}
+        if: ${{ env.HAS_BASE_URL == 'true' && (env.HAS_ACCESS_TOKEN == 'true' || env.HAS_TEST_LOGIN == 'true') }}
         env:
           BASE_URL: ${{ secrets.BASE_URL }}
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
@@ -67,7 +73,7 @@ jobs:
         run: npm run check:multiuser:access:prod
 
       - name: Optional production concurrent load check
-        if: ${{ secrets.BASE_URL != '' && secrets.ACCESS_TOKEN != '' }}
+        if: ${{ env.HAS_BASE_URL == 'true' && env.HAS_ACCESS_TOKEN == 'true' }}
         env:
           BASE_URL: ${{ secrets.BASE_URL }}
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
