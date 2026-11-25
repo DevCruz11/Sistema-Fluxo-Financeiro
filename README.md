@@ -2,6 +2,10 @@
 
 Sistema web de aprovação de pagamentos em uso diário na **DMF Empreendimentos** e na **JFX Engenharia**. Ele substituiu a coleta física de assinaturas por aprovação digital feita de qualquer lugar.
 
+![Painel do sistema com o resumo do dia, total bruto e pagamentos assinados e pendentes](docs/screenshots/painel.jpg)
+
+*Painel principal rodando localmente com dados fictícios.*
+
 ## O problema
 
 Todo dia, o financeiro extraía os lançamentos do ERP Conta Azul, montava uma planilha com os pagamentos e levava o papel para **3 gestores e 1 diretor** assinarem. O processo tomava **de 2 a 3 horas por dia** e dependia de todos estarem no escritório.
